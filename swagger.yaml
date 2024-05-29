@@ -1,0 +1,997 @@
+---
+definitions:
+  AbortNtxPmRequest:
+    properties:
+      cluster:
+        type: string
+      createdate:
+        type: string
+      creater:
+        type: string
+      createrinfo:
+        type: string
+      description:
+        type: string
+      detaillogpath:
+        type: string
+      id:
+        type: integer
+      latestlog:
+        "$ref": "#/definitions/Log"
+      logs:
+        items:
+          "$ref": "#/definitions/Log"
+        type: array
+      pid:
+        type: integer
+      pmtype:
+        type: string
+      prism:
+        type: string
+      startdate:
+        type: string
+      status:
+        type: string
+    required:
+    - detaillogpath
+    - id
+    - pid
+    type: object
+  AbortNtxPmResponse:
+    properties: {}
+    type: object
+  AbortSliPmRequest:
+    properties:
+      cluster:
+        type: string
+      createdate:
+        type: string
+      creater:
+        type: string
+      createrinfo:
+        type: string
+      description:
+        type: string
+      detaillogpath:
+        type: string
+      id:
+        type: integer
+      latestlog:
+        "$ref": "#/definitions/Log"
+      logs:
+        items:
+          "$ref": "#/definitions/Log"
+        type: array
+      pid:
+        type: integer
+      pmtype:
+        type: string
+      prism:
+        type: string
+      startdate:
+        type: string
+      status:
+        type: string
+    required:
+    - detaillogpath
+    - id
+    - pid
+    type: object
+  AbortSliPmResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  CheckSiteExistenceRequest:
+    properties:
+      country_code:
+        type: string
+      site_code:
+        type: string
+    required:
+    - country_code
+    - site_code
+    type: object
+  CheckSiteExistenceResponse:
+    properties:
+      retail_nutanix:
+        "$ref": "#/definitions/RetailNtx"
+      retail_simplivity:
+        "$ref": "#/definitions/RetailSli"
+    type: object
+  CreateNtxPmRequest:
+    properties:
+      cluster:
+        type: string
+      description:
+        type: string
+      pmtype:
+        enum:
+        - poweron
+        - poweroff
+        type: string
+      prism:
+        type: string
+      scheduledate:
+        type: string
+      startnow:
+        type: boolean
+    required:
+    - cluster
+    - description
+    - pmtype
+    - prism
+    type: object
+  CreateNtxPmResponse:
+    properties:
+      cluster:
+        type: string
+      createdate:
+        type: string
+      creater:
+        type: string
+      createrinfo:
+        type: string
+      description:
+        type: string
+      detaillogpath:
+        type: string
+      id:
+        type: integer
+      pid:
+        type: integer
+      pmtype:
+        type: string
+      prism:
+        type: string
+      startdate:
+        type: string
+      status:
+        type: string
+    type: object
+  CreateRbacRoleRequest:
+    properties:
+      name:
+        type: string
+      privilege:
+        "$ref": "#/definitions/Privilege"
+    required:
+    - name
+    - privilege
+    type: object
+  CreateSliPmRequest:
+    properties:
+      cluster:
+        type: string
+      description:
+        type: string
+      pmtype:
+        type: string
+      scheduledate:
+        type: string
+      startnow:
+        type: boolean
+      vcenter:
+        type: string
+    required:
+    - cluster
+    - description
+    - pmtype
+    - vcenter
+    type: object
+  CreateSliPmResponse:
+    properties:
+      cluster:
+        type: string
+      createdate:
+        type: string
+      creater:
+        type: string
+      createrinfo:
+        type: string
+      description:
+        type: string
+      detaillogpath:
+        type: string
+      id:
+        type: integer
+      pid:
+        type: integer
+      pmtype:
+        type: string
+      startdate:
+        type: string
+      status:
+        type: string
+      vcenter:
+        type: string
+    type: object
+  CreateTemplateRequest:
+    properties:
+      app_package:
+        items:
+          type: string
+        type: array
+        x-nullable: true
+      cpu:
+        type: integer
+      cpu_core:
+        type: integer
+      description:
+        type: string
+        x-nullable: true
+      disk:
+        items:
+          maximum: 2000
+          minimum: 0
+          type: integer
+        type: array
+      image_id:
+        type: integer
+      image_name:
+        type: string
+        x-nullable: true
+      linux_payload:
+        type: string
+        x-nullable: true
+      memory:
+        type: integer
+      name:
+        type: string
+      naming_convention:
+        type: string
+      update_dns:
+        type: boolean
+      vlan_id:
+        type: integer
+      workload_type:
+        enum:
+        - windows
+        - linux
+        - network
+        type: string
+    required:
+    - cpu
+    - cpu_core
+    - disk
+    - image_id
+    - memory
+    - name
+    - naming_convention
+    - update_dns
+    - vlan_id
+    type: object
+  CreateUserRequest:
+    properties:
+      is_local_user:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      role_ids:
+        items:
+          type: integer
+        type: array
+    required:
+    - name
+    - role_ids
+    type: object
+  DeleteRbacRoleRequest:
+    properties:
+      role_id:
+        type: integer
+    required:
+    - role_id
+    type: object
+  DeleteTemplateRequest:
+    properties:
+      template_ids:
+        items:
+          type: integer
+        type: array
+    type: object
+  DeleteUserRequest:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  GetPmTaskInfoResponse:
+    properties:
+      cluster:
+        type: string
+      createdate:
+        format: date-time
+        type: string
+      creater:
+        type: string
+      createrinfo:
+        type: string
+      description:
+        type: string
+      detaillogpath:
+        type: string
+      id:
+        type: integer
+      logs:
+        items:
+          "$ref": "#/definitions/ModelNTXPMLog"
+        type: array
+      pid:
+        type: integer
+      pmtype:
+        type: string
+      prism:
+        type: string
+      startdate:
+        format: date-time
+        type: string
+      status:
+        type: string
+    type: object
+  ListPeVmRequest:
+    properties:
+      pe:
+        type: string
+    required:
+    - pe
+    type: object
+  ListSLIVmRequest:
+    properties:
+      cluster:
+        type: string
+      country_code:
+        type: string
+      site_code:
+        type: string
+      vc:
+        type: string
+    required:
+    - cluster
+    - country_code
+    - site_code
+    - vc
+    type: object
+  Log:
+    properties:
+      id:
+        type: integer
+      logdate:
+        type: string
+      loginfo:
+        type: string
+      severity:
+        type: string
+      task_id:
+        type: integer
+      tasktype:
+        type: string
+    type: object
+  LoginResponse:
+    properties:
+      name:
+        type: string
+      privilege:
+        allOf:
+        - "$ref": "#/definitions/Privilege"
+        description: user Privileges
+      roles:
+        items:
+          type: string
+        type: array
+      token:
+        type: string
+    type: object
+  ModelNTXPMLog:
+    properties:
+      id:
+        type: integer
+      logdate:
+        type: string
+      loginfo:
+        type: string
+      severity:
+        type: string
+      task_id:
+        type: integer
+      tasktype:
+        type: string
+    type: object
+  PeVm:
+    properties:
+      is_controller_vm:
+        type: boolean
+      name:
+        type: string
+      state:
+        type: string
+      uuid:
+        type: string
+    type: object
+  Privilege:
+    properties:
+      role_administration:
+        "$ref": "#/definitions/RoleAdministration"
+      role_dashboard:
+        "$ref": "#/definitions/RoleDashBoard"
+      role_lcm:
+        "$ref": "#/definitions/RoleLCM"
+      role_mkt:
+        "$ref": "#/definitions/RoleMkt"
+      role_ntx:
+        "$ref": "#/definitions/RoleNtx"
+      role_pm:
+        "$ref": "#/definitions/RolePm"
+      role_sli:
+        "$ref": "#/definitions/RoleSli"
+    type: object
+  RetailNtx:
+    properties:
+      existence:
+        type: boolean
+      pc:
+        type: string
+      pe:
+        type: string
+    type: object
+  RetailSli:
+    properties:
+      cluster:
+        type: string
+      existence:
+        type: boolean
+      vc:
+        type: string
+    type: object
+  RoleAdministration:
+    properties:
+      view_role:
+        type: string
+      view_user:
+        type: string
+    type: object
+  RoleDashBoard:
+    properties:
+      view:
+        type: string
+    type: object
+  RoleLCM:
+    properties:
+      view_aos:
+        type: string
+      view_move:
+        type: string
+      view_spp:
+        type: string
+    type: object
+  RoleMkt:
+    properties:
+      abort_wl:
+        type: string
+      create_template:
+        type: string
+      create_wl:
+        type: string
+      edit_template:
+        type: string
+      remove_template:
+        type: string
+      remove_wl:
+        type: string
+      view_template:
+        type: string
+      view_wl:
+        type: string
+    type: object
+  RoleNtx:
+    properties:
+      add_pc:
+        type: string
+      remove_pc:
+        type: string
+      view_ahv:
+        type: string
+      view_pc:
+        type: string
+      view_pe:
+        type: string
+      view_vm:
+        type: string
+    type: object
+  RolePm:
+    properties:
+      abort_ntx_pm:
+        type: string
+      abort_sli_pm:
+        type: string
+      create_ntx_pm:
+        type: string
+      create_sli_pm:
+        type: string
+      delete_ntx_pm:
+        type: string
+      delete_sli_pm:
+        type: string
+      view_ntx_pm:
+        type: string
+      view_sli_pm:
+        type: string
+    type: object
+  RoleSli:
+    properties:
+      view_cluster:
+        type: string
+      view_host:
+        type: string
+      view_vc:
+        type: string
+      view_vm:
+        type: string
+    type: object
+  SLIVm:
+    properties:
+      is_controller_vm:
+        type: boolean
+      name:
+        type: string
+      state:
+        type: string
+    type: object
+  UpdateRbacRoleRequest:
+    properties:
+      privilege:
+        "$ref": "#/definitions/Privilege"
+      role_id:
+        type: integer
+    required:
+    - role_id
+    type: object
+  UpdateTemplateRequest:
+    properties:
+      app_package:
+        items:
+          type: string
+        type: array
+        x-nullable: true
+      cpu:
+        type: integer
+      cpu_core:
+        type: integer
+      disk:
+        items:
+          maximum: 2000
+          minimum: 0
+          type: integer
+        type: array
+      image_id:
+        type: integer
+      linux_payload:
+        type: string
+        x-nullable: true
+      memory:
+        type: integer
+      name:
+        type: string
+      template_id:
+        type: integer
+      update_dns:
+        type: boolean
+      vlan_id:
+        type: integer
+      workload_type:
+        enum:
+        - windows
+        - linux
+        - network
+        type: string
+    required:
+    - template_id
+    - update_dns
+    type: object
+  UpdateUserRoleRequest:
+    properties:
+      role_ids:
+        items:
+          type: integer
+        type: array
+      user_id:
+        type: integer
+    required:
+    - role_ids
+    - user_id
+    type: object
+info:
+  title: Unit Portal
+  version: v1
+paths:
+  "/api/v1/login":
+    post:
+      description: Login API
+      parameters:
+      - description: Basic Auth, (username, password)
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/LoginResponse"
+      tags:
+      - Authentication
+  "/api/v1/ntx/automation/lcm/spp/task/list":
+    get:
+      description: Get SPP list
+      parameters: []
+      responses: {}
+      tags:
+      - Automation
+  "/api/v1/ntx/pe/vm/list":
+    post:
+      description: List PE VMs
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/ListPeVmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              "$ref": "#/definitions/PeVm"
+            type: array
+      tags:
+      - View Resources
+  "/api/v1/ntx/pm/abort":
+    post:
+      description: Abort Nutanix PM
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/AbortNtxPmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/AbortNtxPmResponse"
+      tags:
+      - Power Maintenance
+  "/api/v1/ntx/pm/create":
+    post:
+      description: Create Nutanix PM
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateNtxPmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/CreateNtxPmResponse"
+      tags:
+      - Power Maintenance
+  "/api/v1/ntx/pm/info/{pm_id}":
+    get:
+      description: Get Nutanix PM task info
+      parameters:
+      - format: int32
+        in: path
+        name: pm_id
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/GetPmTaskInfoResponse"
+      tags:
+      - Power Maintenance
+  "/api/v1/ntx/workload/template":
+    delete:
+      description: Delete workload template
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/DeleteTemplateRequest"
+      responses: {}
+      tags:
+      - Marketplace
+    post:
+      description: Create workload template
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          items:
+            "$ref": "#/definitions/CreateTemplateRequest"
+          type: array
+      responses: {}
+      tags:
+      - Marketplace
+    put:
+      description: Update workload template
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/UpdateTemplateRequest"
+      responses: {}
+      tags:
+      - Marketplace
+  "/api/v1/pm/sli/create":
+    post:
+      description: Create SimpliVity PM
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateSliPmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/CreateSliPmResponse"
+      tags:
+      - Power Maintenance
+  "/api/v1/rbac_role":
+    delete:
+      description: Delete RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/DeleteRbacRoleRequest"
+      responses: {}
+      tags:
+      - Admin
+    get:
+      description: Get RBAC role
+      parameters: []
+      responses: {}
+      tags:
+      - Admin
+    post:
+      description: Create RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateRbacRoleRequest"
+      responses: {}
+      tags:
+      - Admin
+    put:
+      description: Update RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/UpdateRbacRoleRequest"
+      responses: {}
+      tags:
+      - Admin
+  "/api/v1/rbac_role/{role_id}":
+    delete:
+      description: Delete RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/DeleteRbacRoleRequest"
+      - in: path
+        name: role_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+    get:
+      description: Get RBAC role
+      parameters:
+      - in: path
+        name: role_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+    post:
+      description: Create RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateRbacRoleRequest"
+      - in: path
+        name: role_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+    put:
+      description: Update RBAC role
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/UpdateRbacRoleRequest"
+      - in: path
+        name: role_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+  "/api/v1/simplivity/vm/list":
+    post:
+      description: List SimpliVity VMs
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/ListSLIVmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              "$ref": "#/definitions/SLIVm"
+            type: array
+      tags:
+      - View Resources
+  "/api/v1/siteexistence":
+    post:
+      description: Check Site Existence Real Time
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CheckSiteExistenceRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/CheckSiteExistenceResponse"
+      tags:
+      - View Resources
+  "/api/v1/siteexistence_db":
+    post:
+      description: Check Site Existence From Database
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CheckSiteExistenceRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/CheckSiteExistenceResponse"
+      tags:
+      - View Resources
+  "/api/v1/sli/pm/abort":
+    post:
+      description: Abort SimpliVity PM
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/AbortSliPmRequest"
+      responses:
+        '200':
+          description: ''
+          schema:
+            "$ref": "#/definitions/AbortSliPmResponse"
+      tags:
+      - Power Maintenance
+  "/api/v1/user":
+    delete:
+      description: Delete user
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/DeleteUserRequest"
+      responses: {}
+      tags:
+      - Admin
+    get:
+      description: Get user info
+      parameters: []
+      responses: {}
+      tags:
+      - Admin
+    post:
+      description: Create user
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateUserRequest"
+      responses: {}
+      tags:
+      - Admin
+  "/api/v1/user/role":
+    get:
+      parameters: []
+      responses: {}
+    put:
+      description: Update user roles
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/UpdateUserRoleRequest"
+      responses: {}
+      tags:
+      - Admin
+  "/api/v1/user/{user_id}":
+    delete:
+      description: Delete user
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/DeleteUserRequest"
+      - in: path
+        name: user_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+    get:
+      description: Get user info
+      parameters:
+      - in: path
+        name: user_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+    post:
+      description: Create user
+      parameters:
+      - in: body
+        name: body
+        required: false
+        schema:
+          "$ref": "#/definitions/CreateUserRequest"
+      - in: path
+        name: user_id
+        required: true
+        type: string
+      responses: {}
+      tags:
+      - Admin
+swagger: 2.0.0
